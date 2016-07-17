@@ -1,6 +1,6 @@
 {
     "name"             : "oddgreg/nine-collections",
-    "description"      : "Utility collection classes.",
+    "description"      : "A library of Collection classes and functions.",
     "type"             : "library",
     "license"          : "MIT",
     "authors"          : [
