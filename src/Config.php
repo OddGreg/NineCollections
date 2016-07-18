@@ -37,6 +37,8 @@ class Config extends Collection implements ConfigInterface
      *
      * @param string      $path     Defaults to the path in the CONFIG constant.
      * @param string|NULL $filename Defaults to the filename in the self::COMPILED_CONFIG_FILENAME constant.
+     *
+     * @throws \Nine\Exceptions\CollectionExportWriteFailure
      */
     public function compile(string $path = '', string $filename = self::COMPILED_CONFIG_FILENAME)
     {
@@ -47,7 +49,6 @@ class Config extends Collection implements ConfigInterface
         }
 
         $this->exportPHPFile($path, '*', $filename);
-
         $this->forget('compiled');
     }
 
@@ -70,6 +71,8 @@ class Config extends Collection implements ConfigInterface
      * @param string $key
      *
      * @return mixed
+     * @throws \Symfony\Component\Yaml\Exception\ParseException
+     * @throws \InvalidArgumentException
      */
     public function importByExtension($extension, $filePath, $key = '')
     {
@@ -182,12 +185,11 @@ class Config extends Collection implements ConfigInterface
      */
     public function setBasePath(string $path) : Config
     {
-        if (is_dir($path)) {
-            $this->basePath = $path;
-        }
-        else {
+        if ( ! is_dir($path)) {
             throw new \InvalidArgumentException("Config base path `$path` does not exist.");
         }
+
+        $this->basePath = $path;
 
         return $this;
     }
