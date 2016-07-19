@@ -71,7 +71,7 @@ class Attributes implements AttributesInterface, \ArrayAccess
      *
      * @return array|null
      */
-    public function get(string $name, $default = NULL)
+    public function get($name, $default = NULL)
     {
         return $this->items[$name] ?? $default;
     }

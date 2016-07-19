@@ -68,7 +68,7 @@ class Environment implements EnvironmentInterface
      *
      * @return mixed
      */
-    public function get(string $key, $default = NULL)
+    public function get($key, $default = NULL)
     {
         return $key === '*' ? $this->detectedEnvironment : $this->queryEnv($key, $default);
     }

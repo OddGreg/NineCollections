@@ -12,24 +12,6 @@
 trait WithItemTransforms
 {
     /**
-     * Chunk the underlying collection array.
-     *
-     * @param  int $size
-     *
-     * @return $this
-     */
-    public function chunk($size)
-    {
-        $chunks = [];
-
-        foreach (array_chunk($this->items, $size, TRUE) as $chunk) {
-            $chunks[] = new static($chunk);
-        }
-
-        return new static($chunks);
-    }
-
-    /**
      * Execute a callback over each item.
      *
      * @param  callable $callback
@@ -111,47 +93,5 @@ trait WithItemTransforms
 
         return $this;
     }
-
-    /**
-     * Collapse an array of arrays into a single array.
-     *
-     *  <pre>
-     *      given:   [[1,2,3],[4,5,6],[7,8,9]]
-     *
-     *      result:  [1,2,3,4,5,6,7,8,9]</pre>
-     *
-     * @param  array|\ArrayAccess $array
-     *
-     * @return array
-     */
-    private static function array_collapse($array)
-    {
-        $results = [];
-
-        foreach ($array as $values) {
-            /** @noinspection SlowArrayOperationsInLoopInspection */
-            $results = array_merge($results, $values);
-        }
-
-        return $results;
-    }
-
-    /**
-     * **Flatten a multi-dimensional array into a single level.**
-     *
-     * @param  array $array
-     *
-     * @return array
-     */
-    //public static function flatten($array)
-    //{
-    //    $return = [];
-    //
-    //    array_walk_recursive($array, function ($x) use (&$return) {
-    //        $return[] = $x;
-    //    });
-    //
-    //    return $return;
-    //}
 
 }

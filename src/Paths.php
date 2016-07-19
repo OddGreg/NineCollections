@@ -6,7 +6,6 @@
  * @author  Greg Truesdell <odd.greg@gmail.com>
  */
 
-use LogicException;
 use Nine\Traits\WithItemArrayAccess;
 use Nine\Traits\WithItemImportExport;
 
@@ -81,6 +80,7 @@ class Paths extends Collection implements PathsInterface
     private function normalize_path($path) : string
     {
         $orig = $path;
+
         return ! realpath($path) ? $orig : rtrim(realpath($path), '/') . '/';
     }
 

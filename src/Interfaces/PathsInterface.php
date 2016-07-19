@@ -31,7 +31,7 @@ interface PathsInterface extends StorableInterface, RetrievableInterface
      *
      * @return mixed
      */
-    public function get(string $query, $default = NULL);
+    public function get($query, $default = NULL);
 
     /**
      * **TRUE if an indexed value exists.**

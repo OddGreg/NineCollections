@@ -88,7 +88,7 @@ trait WithItemArrayAccess
      *
      * @return mixed
      */
-    public function get(string $query, $default = NULL)
+    public function get($query, $default = NULL)
     {
         return Lib::array_query($this->items, $query, value($default));
     }
@@ -165,7 +165,7 @@ trait WithItemArrayAccess
      *
      * @return void
      */
-    public function put(string $key, $value)
+    public function put($key, $value)
     {
         # attempt writing the value to the key
         if (is_string($key)) {
