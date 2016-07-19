@@ -13,7 +13,3 @@ A library of collection-related classes and functions.
 Dependency: Nine Library (`oddgreg/nine-library`)
 
 License: MIT
-
-> Test coverage note: `Collection.php` is not included in the tests. It is essentially a copy of Illuminate\Support\Collections.php.
->
-> Tests will be included as features change.
