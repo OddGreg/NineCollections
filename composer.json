@@ -26,11 +26,11 @@
     },
     "minimum-stability": "dev",
     "require"          : {
-        "oddgreg/nine-library": "^v1.0",
+        "oddgreg/nine-library": "dev-master",
         "vlucas/phpdotenv"    : "^2.3"
     },
     "prefer-stable"    : true,
-    "-require-dev"      : {
+    "require-dev"      : {
         "phpunit/phpunit"                    : "^5.1@dev",
         "psy/psysh"                          : "@stable",
         "tracy/tracy"                        : "^2.4@dev",
