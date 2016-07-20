@@ -8,6 +8,7 @@
 
 use BadMethodCallException;
 use Closure;
+use Nine\src\Traits\WithItemsToArray;
 use Nine\Traits\WithItemArrayAccess;
 use Nine\Traits\WithItemImport;
 use Nine\Traits\WithItemTransforms;
@@ -20,9 +21,10 @@ class Scope implements ScopeInterface, \ArrayAccess, \Countable, \JsonSerializab
     use WithItemImport;
     use WithItemTransforms;
     use WithItemArrayAccess;
+    use WithItemsToArray;
 
     /** @var array */
-    protected $items;
+    //protected $items;
 
     /** @var array */
     protected $plugins;
@@ -150,20 +152,6 @@ class Scope implements ScopeInterface, \ArrayAccess, \Countable, \JsonSerializab
         $this->items[$key] = $value;
     }
 
-    /**
-     * **Get the collection of items as a PHP array.**
-     *
-     * @return array
-     */
-    public function toArray() : array
-    {
-        return array_map(function ($value) {
-            return is_object($value) && method_exists($value, 'toArray')
-                ? $value->toArray()
-                : $value;
-
-        }, $this->items);
-    }
 
     /**
      * **Get the collection of items as JSON.**

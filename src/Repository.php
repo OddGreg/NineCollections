@@ -50,7 +50,8 @@ class Repository implements RepositoryInterface, \ArrayAccess
     {
         $array = $this->get($key);
 
-        if (is_array($array)) {
+        if (is_array($array))
+        {
             $array[] = $value;
             $this->set($key, $array);
 
@@ -148,7 +149,8 @@ class Repository implements RepositoryInterface, \ArrayAccess
     {
         $array = $this->get($key);
 
-        if (is_array($array)) {
+        if (is_array($array))
+        {
             array_unshift($array, $value);
             $this->set($key, $array);
 
@@ -169,14 +171,17 @@ class Repository implements RepositoryInterface, \ArrayAccess
      */
     public function set($key, $value = NULL)
     {
-        if (is_array($key)) {
-            foreach ($key as $innerKey => $innerValue) {
+        if (is_array($key))
+        {
+            foreach ($key as $innerKey => $innerValue)
+            {
                 $this->lib->array_set($this->items, $innerKey, $innerValue);
             }
+
+            return;
         }
-        else {
-            $this->lib->array_set($this->items, $key, $value);
-        }
+
+        $this->lib->array_set($this->items, $key, $value);
     }
 
 }

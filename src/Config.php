@@ -148,7 +148,7 @@ class Config extends Collection implements ConfigInterface
     public function importFolder($basePath, $mask = '*.php') : Config
     {
         // determine if the requested folder has been compiled.
-        if ($mask === '*.php' and $this->isCompiled($this->compilePath)) {
+        if ($mask === '*.php' && $this->isCompiled($this->compilePath)) {
             // yes, so import the compiled file instead.
             $this->importCompiledFile($basePath);
 
@@ -208,7 +208,7 @@ class Config extends Collection implements ConfigInterface
      *
      * @return Config|static
      */
-    static public function createFromFolder($folder) : Config
+    public static function createFromFolder($folder) : Config
     {
         return (new static)->importFolder($folder);
     }
@@ -220,7 +220,7 @@ class Config extends Collection implements ConfigInterface
      *
      * @throws \InvalidArgumentException
      */
-    static public function createFromJson($json)
+    public static function createFromJson($json)
     {
         $config = new static;
         $config->importJSON($json);
@@ -233,7 +233,7 @@ class Config extends Collection implements ConfigInterface
      *
      * @return Config|static
      */
-    static public function createFromYaml($yaml) : Config
+    public static function createFromYaml($yaml) : Config
     {
         $config = new static;
         $config->importYAML($yaml);

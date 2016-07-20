@@ -1,6 +1,7 @@
 <?php namespace Nine\Collections;
 
 use Nine\Collections\Exceptions\ImmutableViolationException;
+use Nine\src\Traits\WithItemsToArray;
 use Nine\Traits\WithImmutability;
 
 /**
@@ -19,6 +20,7 @@ use Nine\Traits\WithImmutability;
 class Attributes implements AttributesInterface, \ArrayAccess
 {
     use WithImmutability;
+    use WithItemsToArray;
 
     protected $items;
 
@@ -149,21 +151,6 @@ class Attributes implements AttributesInterface, \ArrayAccess
         $this->items = $this->getArrayableItems($attributes);
 
         return $this;
-    }
-
-    /**
-     * **Get the collection of items as a PHP array.**
-     *
-     * @return array
-     */
-    public function toArray() : array
-    {
-        return array_map(function ($value) {
-            return is_object($value) && method_exists($value, 'toArray')
-                ? $value->toArray()
-                : $value;
-
-        }, $this->items);
     }
 
     /**

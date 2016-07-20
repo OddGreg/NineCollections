@@ -91,7 +91,6 @@ class Environment implements EnvironmentInterface
     public function has($key)
     {
         return NULL !== env(strtoupper($key), NULL);
-        //return NULL !== $this->queryEnv($key, NULL);
     }
 
     /**
@@ -116,10 +115,6 @@ class Environment implements EnvironmentInterface
         }
 
         return $value;
-
-        //return $value;
-        //return $this->translateValue($this->stripBoundingQuotes($value));
-
     }
 
     /**
@@ -133,43 +128,4 @@ class Environment implements EnvironmentInterface
     {
         return $value instanceof \Closure || is_callable($value) ? $value() : $value;
     }
-
-    /**
-     * @param $value
-     *
-     * @return string
-     */
-    //private function stripBoundingQuotes($value)
-    //{
-    //    return (strlen($value) > 1 && preg_match('/"/', $value)) ? substr($value, 1, -1) : $value;
-    //}
-
-    ///**
-    // * @param $value
-    // *
-    // * @return bool|null|string
-    // */
-    //private function translateValue($value)
-    //{
-    //    switch (strtolower($value)) {
-    //        case 'true':
-    //        case '(true)':
-    //            return TRUE;
-    //
-    //        case 'false':
-    //        case '(false)':
-    //            return FALSE;
-    //
-    //        case 'empty':
-    //        case '(empty)':
-    //            return '';
-    //
-    //        case 'null':
-    //        case '(null)':
-    //            return NULL;
-    //    }
-    //
-    //    return $value;
-    //}
-
 }

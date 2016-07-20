@@ -21,6 +21,8 @@ use Nine\Library\Lib;
  */
 trait WithItemArrayAccess
 {
+    protected $items = [];
+
     /**
      * **Dynamically retrieve the value of an attribute.**
      *
@@ -55,6 +57,7 @@ trait WithItemArrayAccess
      * @param array | mixed $value
      *
      * @return array|mixed|null
+     * @throws \InvalidArgumentException
      */
     public function append($key, $value = NULL)
     {
