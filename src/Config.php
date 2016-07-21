@@ -8,6 +8,7 @@
 
 use Nine\Traits\WithItemArrayAccess;
 use Nine\Traits\WithItemImportExport;
+use Symfony\Component\Yaml\Exception\ParseException;
 
 /**
  * **Config provides a central, standardised method of handling
@@ -71,7 +72,7 @@ class Config extends Collection implements ConfigInterface
      * @param string $key
      *
      * @return mixed
-     * @throws \Symfony\Component\Yaml\Exception\ParseException
+     * @throws ParseException
      * @throws \InvalidArgumentException
      */
     public function importByExtension($extension, $filePath, $key = '')
@@ -88,24 +89,7 @@ class Config extends Collection implements ConfigInterface
         # include only if the root key does not exist
         if ( ! $this->offsetExists($key)) {
 
-            $import = FALSE;
-
-            if ($extension === '.php') {
-                if ( ! file_exists($filePath)) {
-                    throw new \InvalidArgumentException("Config file $filePath does not exist.");
-                }
-
-                /** @noinspection UntrustedInclusionInspection */
-                $import = include "$filePath";
-            }
-
-            if (in_array($extension, ['.yaml', '.yml'], TRUE)) {
-                $import = $this->importYAML($filePath);
-            }
-
-            if ($extension === '.json') {
-                $import = $this->importJSON($filePath);
-            }
+            $import = $this->import($filePath, $extension);
 
             # only import if the config file returns an array
             if (is_array($import)) {
@@ -242,20 +226,60 @@ class Config extends Collection implements ConfigInterface
     }
 
     /**
+     * @param $filePath
+     *
+     * @param $extension
+     *
+     * @return array|mixed
+     */
+    protected function import($filePath, $extension)
+    {
+        $import = FALSE;
+
+        if ($extension === '.php')
+        {
+            if ( ! file_exists($filePath))
+            {
+                throw new \InvalidArgumentException("Config file $filePath does not exist.");
+            }
+
+            /** @noinspection UntrustedInclusionInspection */
+            $import = include "$filePath";
+        }
+
+        if (in_array($extension, ['.yaml', '.yml'], TRUE))
+        {
+            $import = $this->importYAML($filePath);
+        }
+
+        if ($extension === '.json')
+        {
+            $import = $this->importJSON($filePath);
+
+            return $import;
+        }
+
+        return $import;
+    }
+
+    /**
      * Import configuration data from a set of files.
      *
      * @param array  $files
      * @param string $fileExtension
+     *
+     * @throws \InvalidArgumentException
+     * @throws ParseException
      */
     private function importFiles(array $files, $fileExtension = '.php')
     {
-        foreach ($files as $config_file) {
+        foreach ($files as $configFile) {
             # use the base name as the config key.
             # i.e.: `config/happy.php` -> `happy`
-            $config_key = basename($config_file, $fileExtension);
+            $configKey = basename($configFile, $fileExtension);
 
             # load
-            $this->importByExtension($fileExtension, $config_file, $config_key);
+            $this->importByExtension($fileExtension, $configFile, $configKey);
         }
     }
 

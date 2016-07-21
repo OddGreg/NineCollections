@@ -153,7 +153,7 @@ trait WithItemArrayAccess
      *
      * @return mixed
      */
-    public function search_and_replace($key, $default = NULL)
+    public function searchAndReplace($key, $default = NULL)
     {
         return Lib::array_search_and_replace($this->items, $key, $default);
     }
@@ -173,7 +173,7 @@ trait WithItemArrayAccess
         # attempt writing the value to the key
         if (is_string($key)) {
             list($key, $value) = Lib::expand_segments($key, $value);
-            $this->search_and_replace([$key => $value]);
+            $this->searchAndReplace([$key => $value]);
         }
     }
 

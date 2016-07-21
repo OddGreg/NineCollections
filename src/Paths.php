@@ -31,12 +31,12 @@ class Paths extends Collection implements PathsInterface
         // verify/update paths
         foreach ($data as $key => $path)
             /** @noinspection AlterInForeachInspection */
-            $data[$key] = $this->normalize_path($path);
+            $data[$key] = $this->normalizePath($path);
 
         parent::__construct($data);
     }
 
-    /**
+    /** @noinspection PhpMissingParentCallCommonInspection
      * @param array $import
      *
      * @return $this|Paths
@@ -47,7 +47,7 @@ class Paths extends Collection implements PathsInterface
         # set normalize paths
         array_map(
             function ($key, $path) use (&$import) {
-                $this->offsetSet($key, $this->normalize_path($path));
+                $this->offsetSet($key, $this->normalizePath($path));
             },
             array_keys($import), array_values($import)
         );
@@ -66,7 +66,7 @@ class Paths extends Collection implements PathsInterface
      */
     public function set(string $key, $path) : Paths
     {
-        $this->items[$key] = $path = $this->normalize_path($path);
+        $this->items[$key] = $path = $this->normalizePath($path);
 
         return $this;
     }
@@ -77,7 +77,7 @@ class Paths extends Collection implements PathsInterface
      * @return string
      * @throws \LogicException
      */
-    private function normalize_path($path) : string
+    private function normalizePath($path) : string
     {
         $orig = $path;
 

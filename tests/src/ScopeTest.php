@@ -35,7 +35,7 @@ class ScopeTest extends \PHPUnit_Framework_TestCase
         $scope->set('d', 'other');
         static::assertEquals('other', $scope->get('d'));
         // search and replace
-        $scope->search_and_replace(['d' => 'fork']);
+        $scope->searchAndReplace(['d' => 'fork']);
         static::assertEquals('fork', $scope->get('d'));
     }
 
