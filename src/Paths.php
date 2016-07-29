@@ -12,7 +12,7 @@ use Nine\Traits\WithItemImportExport;
 /**
  * **Paths provides a simple interface for handling paths in the F9 framework.**
  */
-class Paths extends Collection implements PathsInterface
+class Paths implements PathsInterface, \ArrayAccess
 {
     // file and type import and export methods
     use WithItemImportExport;
@@ -33,7 +33,8 @@ class Paths extends Collection implements PathsInterface
             /** @noinspection AlterInForeachInspection */
             $data[$key] = $this->normalizePath($path);
 
-        parent::__construct($data);
+        $this->items = $data;
+        //parent::__construct($data);
     }
 
     /** @noinspection PhpMissingParentCallCommonInspection
