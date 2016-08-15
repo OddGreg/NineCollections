@@ -30,7 +30,7 @@ if (defined('SUPPORT_HELPERS_LOADED')) {
 
 define('SUPPORT_HELPERS_LOADED', TRUE);
 
-if ( ! function_exists('collect')) {
+if ( ! function_exists('collect') && ! class_exists('\Illuminate\Support\Collection')) {
     /**
      * Returns a collection containing the array values provided.
      *
