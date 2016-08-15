@@ -34,7 +34,6 @@ class Paths implements PathsInterface, \ArrayAccess
             $data[$key] = $this->normalizePath($path);
 
         $this->items = $data;
-        //parent::__construct($data);
     }
 
     /** @noinspection PhpMissingParentCallCommonInspection
