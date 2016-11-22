@@ -92,15 +92,19 @@ class AttributesTest extends \PHPUnit_Framework_TestCase
         /** @noinspection OnlyWritesOnParameterInspection */
         $attributes = new Attributes([]);
 
+        /** @noinspection OnlyWritesOnParameterInspection */
+        $attributes['test']= 'this should succeed';
+
         $this->expectException(ImmutableViolationException::class);
 
         /** @noinspection OnlyWritesOnParameterInspection */
-        $attributes['test'] = 'this should fail';
+        $attributes['test'] = 'this should not succeed';
     }
 
     public function test_immutable_set()
     {
         $attributes = new Attributes([]);
+        $attributes->set('this', 'should succeed');
         $this->expectException(ImmutableViolationException::class);
         $attributes->set('this', 'should fail');
     }

@@ -6,7 +6,7 @@ use Nine\Collections\Exceptions\ImmutableViolationException;
  * This trait exposes immutability violation exceptions for common
  * methods.
  *
- * @see     Nine\Attributes
+ * @see     \Nine\Collections\Attributes
  *
  * @package Nine Traits
  * @version 0.4.2
@@ -22,10 +22,12 @@ trait WithImmutability
      */
     public function __set($key, $value)
     {
-        if (NULL !== $key || NULL !== $value)
+        if (array_key_exists($key, $this->{'items'})) //if (NULL !== $key || NULL !== $value)
         {
-            throw new ImmutableViolationException();
+            throw new ImmutableViolationException('Cannot replace an immutable item. (' . __LINE__ . ')');
         }
+
+        $this->{'items'}[$key] = $value;
     }
 
     /**
@@ -36,10 +38,12 @@ trait WithImmutability
      */
     public function offsetSet($key, $value)
     {
-        if (NULL !== $key || NULL !== $value)
+        if (isset($this->{'items'}[$key])) //if (NULL !== $key || NULL !== $value)
         {
-            throw new ImmutableViolationException();
+            throw new ImmutableViolationException('Cannot replace an immutable item. (' . __LINE__ . ')');
         }
+
+        $this->{'items'}[$key] = $value;
     }
 
     /**
@@ -49,9 +53,8 @@ trait WithImmutability
      */
     public function offsetUnset($key)
     {
-        if (NULL !== $key)
-        {
-            throw new ImmutableViolationException('Cannot remove an immutable item.');
+        if (array_key_exists($key, $this->{'items'})) {
+            throw new ImmutableViolationException('Cannot remove an immutable item. (' . __LINE__ . ')');
         }
     }
 
