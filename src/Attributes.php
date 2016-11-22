@@ -27,9 +27,9 @@ class Attributes implements AttributesInterface, \ArrayAccess
     /**
      * @param array|null $attributes Accept arrays, classes with toArray or toJson as sources.
      */
-    public function __construct($attributes = [])
+    public function __construct($attributes = NULL)
     {
-        if ($attributes) {
+        if (NULL !== $attributes) {
             $this->items = $this->getArrayableItems($attributes);
 
             return;
@@ -126,7 +126,7 @@ class Attributes implements AttributesInterface, \ArrayAccess
      * @param  string $key
      * @param  mixed  $value
      *
-     * @return $this
+     * @return void
      */
     public function set(string $key, $value)
     {
