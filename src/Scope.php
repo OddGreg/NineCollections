@@ -145,7 +145,7 @@ class Scope implements ScopeInterface, \ArrayAccess, \Countable, \JsonSerializab
      * @param  mixed $key
      * @param  mixed $value
      *
-     * @return $this
+     * @return void
      */
     public function set(string $key, $value)
     {
