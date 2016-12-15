@@ -43,6 +43,9 @@ class PathsTest extends \PHPUnit_Framework_TestCase
             (new Yaml)->parse(file_get_contents(__DIR__ . '/config/paths.yml'))
         );
 
+        $all = $paths->all();
+        $this->assertArrayHasKey('storage',$all);
+
         $this->assertArrayHasKey('support', $paths, 'paths should include `support`.');
         //$this->assertEquals('src/support/', $paths['support']);
 

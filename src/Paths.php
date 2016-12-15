@@ -36,6 +36,16 @@ class Paths implements PathsInterface, \ArrayAccess
         $this->items = $data;
     }
 
+    /**
+     * Get all of the items in the collection.
+     *
+     * @return array
+     */
+    public function all()
+    {
+        return $this->items;
+    }
+
     /** @noinspection PhpMissingParentCallCommonInspection
      * @param array $import
      *
