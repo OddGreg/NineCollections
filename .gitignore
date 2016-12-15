@@ -8,3 +8,6 @@
 /codeclimate.yml
 /report.html
 /docs/
+.DS_Store
+.idea/
+
