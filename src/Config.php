@@ -6,8 +6,8 @@
  * @author  Greg Truesdell <odd.greg@gmail.com>
  */
 
-use Nine\Collections\Interfaces\DataImportsInterface;
-use Nine\Collections\Interfaces\ImportingCreateInterface;
+use Nine\Collections\Interfaces\ImportsData;
+use Nine\Collections\Interfaces\CreatesWithData;
 use Nine\Traits\WithItemArrayAccess;
 use Nine\Traits\WithItemImportExport;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -19,7 +19,7 @@ use Symfony\Component\Yaml\Exception\ParseException;
  * A general purpose configuration class with import/export methods
  * and \ArrayAccess with `dot` notation access methods.
  */
-class Config extends Collection implements ImportingCreateInterface, DataImportsInterface
+class Config extends Collection implements CreatesWithData, ImportsData
 {
     const COMPILED_CONFIG_FILENAME = '_compiled.php_';
 

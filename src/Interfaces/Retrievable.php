@@ -7,7 +7,7 @@
  */
 namespace Nine\Collections\Interfaces;
 
-interface RetrievableInterface
+interface Retrievable
 {
     /**
      * Get an item from storage by key.

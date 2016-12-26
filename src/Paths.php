@@ -7,15 +7,15 @@
  */
 
 use ArrayAccess;
-use Nine\Collections\Interfaces\AssignableInterface;
-use Nine\Collections\Interfaces\RetrievableInterface;
+use Nine\Collections\Interfaces\Assignable;
+use Nine\Collections\Interfaces\Retrievable;
 use Nine\Traits\WithItemArrayAccess;
 use Nine\Traits\WithItemImportExport;
 
 /**
  * **Paths provides a simple interface for handling paths in the F9 framework.**
  */
-class Paths implements ArrayAccess, AssignableInterface, RetrievableInterface
+class Paths implements ArrayAccess, Assignable, Retrievable
 {
     // file and type import and export methods
     use WithItemImportExport;

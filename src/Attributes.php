@@ -1,6 +1,8 @@
 <?php namespace Nine\Collections;
 
 use Nine\Collections\Exceptions\ImmutableViolationException;
+use Nine\Collections\Interfaces\Assignable;
+use Nine\Collections\Interfaces\Retrievable;
 use Nine\src\Traits\WithItemsToArray;
 use Nine\Traits\WithImmutability;
 
@@ -17,7 +19,7 @@ use Nine\Traits\WithImmutability;
  * @version 0.4.2
  * @author  Greg Truesdell
  */
-class Attributes implements AttributesInterface, \ArrayAccess
+class Attributes implements AttributesInterface, Assignable, Retrievable
 {
     use WithImmutability;
     use WithItemsToArray;
@@ -56,7 +58,7 @@ class Attributes implements AttributesInterface, \ArrayAccess
      *
      * @return array
      */
-    public function copy() : array
+    public function copy(): array
     {
         $copy = [];
 
@@ -83,7 +85,7 @@ class Attributes implements AttributesInterface, \ArrayAccess
      *
      * @return Attributes
      */
-    public function getAttributes() : Attributes
+    public function getAttributes(): Attributes
     {
         return (clone $this);
     }
@@ -105,7 +107,7 @@ class Attributes implements AttributesInterface, \ArrayAccess
      *
      * @return bool
      */
-    public function offsetExists($offset) : bool
+    public function offsetExists($offset): bool
     {
         return array_key_exists($offset, $this->items);
     }
@@ -142,7 +144,7 @@ class Attributes implements AttributesInterface, \ArrayAccess
      *
      * @throws ImmutableViolationException
      */
-    public function setAttributes($attributes) : Attributes
+    public function setAttributes($attributes): Attributes
     {
         if (is_array($this->items)) {
             throw new ImmutableViolationException('Cannot use setAttributes once the item array is populated.');
@@ -160,7 +162,7 @@ class Attributes implements AttributesInterface, \ArrayAccess
      *
      * @return string
      */
-    public function toJson($options = 0) : string
+    public function toJson($options = 0): string
     {
         return json_encode($this->items, $options);
     }
@@ -172,7 +174,7 @@ class Attributes implements AttributesInterface, \ArrayAccess
      *
      * @return array
      */
-    protected function getArrayableItems($items) : array
+    protected function getArrayableItems($items): array
     {
         if ($items instanceof self) {
             return $items->copy();
@@ -186,6 +188,6 @@ class Attributes implements AttributesInterface, \ArrayAccess
             return json_decode($items->toJson(), TRUE);
         }
 
-        return (array) $items;
+        return (array)$items;
     }
 }

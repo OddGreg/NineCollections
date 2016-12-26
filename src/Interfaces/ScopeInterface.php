@@ -7,13 +7,13 @@
  */
 namespace Nine\Collections;
 
-use Nine\Collections\Interfaces\RetrievableInterface;
-use Nine\Collections\Interfaces\AssignableInterface;
+use Nine\Collections\Interfaces\Retrievable;
+use Nine\Collections\Interfaces\Assignable;
 
 /**
  * **Scope is a context container.**
  */
-interface ScopeInterface extends AssignableInterface, RetrievableInterface
+interface ScopeInterface extends Assignable, Retrievable
 {
     /**
      * **Merge the scope with the provided array-able items.**

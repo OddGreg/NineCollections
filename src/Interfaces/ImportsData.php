@@ -1,14 +1,14 @@
 <?php namespace Nine\Collections\Interfaces;
 
 /**
- * DataImportsInterface.php
+ * ImportsData.php
  *
  * @project Collections
  * @created 2016-12-25 5:39 PM
  * @author  Greg Truesdell <odd.greg@gmail.com>
  */
 
-interface DataImportsInterface
+interface ImportsData
 {
     /**
      * @param array $import

@@ -6,7 +6,7 @@
  * @author  Greg Truesdell <odd.greg@gmail.com>
  */
 
-interface EnvironmentInterface extends RetrievableInterface
+interface EnvironmentInterface extends Retrievable
 {
     /**
      * @return array - the environment settings data.

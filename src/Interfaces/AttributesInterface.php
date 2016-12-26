@@ -6,9 +6,10 @@
  * @author  Greg Truesdell <odd.greg@gmail.com>
  */
 
+use ArrayAccess;
 use Nine\Collections\Exceptions\ImmutableViolationException;
-use Nine\Collections\Interfaces\RetrievableInterface;
-use Nine\Collections\Interfaces\AssignableInterface;
+use Nine\Collections\Interfaces\Retrievable;
+use Nine\Collections\Interfaces\Assignable;
 
 /**
  * **A simple immutable attribute collection. **
@@ -23,7 +24,7 @@ use Nine\Collections\Interfaces\AssignableInterface;
  * @version 0.4.2
  * @author  Greg Truesdell
  */
-interface AttributesInterface extends AssignableInterface, RetrievableInterface
+interface AttributesInterface extends ArrayAccess
 {
     /**
      * **Returns an array-able clone of this class.**

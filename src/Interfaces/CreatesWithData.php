@@ -1,14 +1,14 @@
 <?php namespace Nine\Collections\Interfaces;
 
 /**
- * ImportingCreateInterface.php
+ * CreatesWithData.php
  *
  * @project Collections
  * @created 2016-12-25 5:41 PM
  * @author  Greg Truesdell <odd.greg@gmail.com>
  */
 
-interface ImportingCreateInterface
+interface CreatesWithData
 {
     /**
      *
