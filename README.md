@@ -12,4 +12,8 @@ A library of collection-related classes and functions.
 
 Dependency: Nine Library (`oddgreg/nine-library`)
 
-License: MIT
+#### Changes 2016-12-25:
+* Some interface names and composition have changed.
+* The Environment class has been deprecated.
+
+####License: MIT

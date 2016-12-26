@@ -1,6 +1,8 @@
 <?php namespace Nine\Collections;
 
 /**
+ * @deprecated
+ *
  * @package Nine
  * @version 0.4.2
  * @author  Greg Truesdell <odd.greg@gmail.com>
