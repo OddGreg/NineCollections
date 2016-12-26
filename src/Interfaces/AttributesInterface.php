@@ -8,7 +8,7 @@
 
 use Nine\Collections\Exceptions\ImmutableViolationException;
 use Nine\Collections\Interfaces\RetrievableInterface;
-use Nine\Collections\Interfaces\StorableInterface;
+use Nine\Collections\Interfaces\AssignableInterface;
 
 /**
  * **A simple immutable attribute collection. **
@@ -23,10 +23,10 @@ use Nine\Collections\Interfaces\StorableInterface;
  * @version 0.4.2
  * @author  Greg Truesdell
  */
-interface AttributesInterface extends StorableInterface, RetrievableInterface
+interface AttributesInterface extends AssignableInterface, RetrievableInterface
 {
     /**
-     * **Returns an arrayable clone of this class.**
+     * **Returns an array-able clone of this class.**
      *
      * @return static
      */

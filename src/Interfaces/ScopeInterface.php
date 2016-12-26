@@ -8,15 +8,15 @@
 namespace Nine\Collections;
 
 use Nine\Collections\Interfaces\RetrievableInterface;
-use Nine\Collections\Interfaces\StorableInterface;
+use Nine\Collections\Interfaces\AssignableInterface;
 
 /**
  * **Scope is a context container.**
  */
-interface ScopeInterface extends StorableInterface, RetrievableInterface
+interface ScopeInterface extends AssignableInterface, RetrievableInterface
 {
     /**
-     * **Merge the scope with the provided arrayable items.**
+     * **Merge the scope with the provided array-able items.**
      *
      * @param  mixed $items
      *

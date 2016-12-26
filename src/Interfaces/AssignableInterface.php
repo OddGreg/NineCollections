@@ -6,7 +6,7 @@
  * @author  Greg Truesdell <odd.greg@gmail.com>
  */
 
-interface StorableInterface
+interface AssignableInterface
 {
     /**
      * Put an item in storage by key.

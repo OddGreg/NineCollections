@@ -6,6 +6,8 @@
  * @author  Greg Truesdell <odd.greg@gmail.com>
  */
 
+use Nine\Collections\Interfaces\DataImportsInterface;
+use Nine\Collections\Interfaces\ImportingCreateInterface;
 use Nine\Traits\WithItemArrayAccess;
 use Nine\Traits\WithItemImportExport;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -17,7 +19,7 @@ use Symfony\Component\Yaml\Exception\ParseException;
  * A general purpose configuration class with import/export methods
  * and \ArrayAccess with `dot` notation access methods.
  */
-class Config extends Collection implements ConfigInterface
+class Config extends Collection implements ImportingCreateInterface, DataImportsInterface
 {
     const COMPILED_CONFIG_FILENAME = '_compiled.php_';
 
@@ -59,7 +61,9 @@ class Config extends Collection implements ConfigInterface
     public function importArray(Array $import)
     {
         array_map(
-            function ($key, $value) { $this->put($key, $value); },
+            function ($key, $value) {
+                $this->put($key, $value);
+            },
             array_keys($import), array_values($import)
         );
     }
@@ -71,7 +75,6 @@ class Config extends Collection implements ConfigInterface
      * @param        $filePath
      * @param string $key
      *
-     * @return mixed
      * @throws ParseException
      * @throws \InvalidArgumentException
      */
@@ -118,7 +121,7 @@ class Config extends Collection implements ConfigInterface
      */
     public function importFile($file)
     {
-        $this->importFiles((array) $file, '.php');
+        $this->importFiles((array)$file, '.php');
     }
 
     /**
@@ -129,7 +132,7 @@ class Config extends Collection implements ConfigInterface
      *
      * @return Config
      */
-    public function importFolder($basePath, $mask = '*.php') : Config
+    public function importFolder($basePath, $mask = '*.php'): Config
     {
         // determine if the requested folder has been compiled.
         if ($mask === '*.php' && $this->isCompiled($this->compilePath)) {
@@ -156,7 +159,7 @@ class Config extends Collection implements ConfigInterface
      *
      * @return bool
      */
-    public function isCompiled(string $basePath, string $compiledFilename = self::COMPILED_CONFIG_FILENAME) : bool
+    public function isCompiled(string $basePath, string $compiledFilename = self::COMPILED_CONFIG_FILENAME): bool
     {
         return file_exists($basePath . $compiledFilename);
     }
@@ -167,7 +170,7 @@ class Config extends Collection implements ConfigInterface
      * @return Config
      * @throws \InvalidArgumentException
      */
-    public function setBasePath(string $path) : Config
+    public function setBasePath(string $path): Config
     {
         if ( ! is_dir($path)) {
             throw new \InvalidArgumentException("Config base path `$path` does not exist.");
@@ -192,7 +195,7 @@ class Config extends Collection implements ConfigInterface
      *
      * @return Config|static
      */
-    public static function createFromFolder($folder) : Config
+    public static function createFromFolder($folder): Config
     {
         return (new static)->importFolder($folder);
     }
@@ -217,7 +220,7 @@ class Config extends Collection implements ConfigInterface
      *
      * @return Config|static
      */
-    public static function createFromYaml($yaml) : Config
+    public static function createFromYaml($yaml): Config
     {
         $config = new static;
         $config->importYAML($yaml);
@@ -236,10 +239,8 @@ class Config extends Collection implements ConfigInterface
     {
         $import = FALSE;
 
-        if ($extension === '.php')
-        {
-            if ( ! file_exists($filePath))
-            {
+        if ($extension === '.php') {
+            if ( ! file_exists($filePath)) {
                 throw new \InvalidArgumentException("Config file $filePath does not exist.");
             }
 
@@ -247,13 +248,11 @@ class Config extends Collection implements ConfigInterface
             $import = include "$filePath";
         }
 
-        if (in_array($extension, ['.yaml', '.yml'], TRUE))
-        {
+        if (in_array($extension, ['.yaml', '.yml'], TRUE)) {
             $import = $this->importYAML($filePath);
         }
 
-        if ($extension === '.json')
-        {
+        if ($extension === '.json') {
             $import = $this->importJSON($filePath);
 
             return $import;
@@ -291,7 +290,7 @@ class Config extends Collection implements ConfigInterface
      *
      * @return array
      */
-    private function parseFolder($basePath, $fileExtension = '.php') : array
+    private function parseFolder($basePath, $fileExtension = '.php'): array
     {
         $basePath = rtrim(realpath($basePath), '/') . '/';
 
